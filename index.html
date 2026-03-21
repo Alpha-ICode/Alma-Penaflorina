@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alma Peñaflorina | Agrupación Cuequera</title>
+    <style>
+        :root {
+            --bg: #fffaf3;
+            --surface: #ffffff;
+            --surface-alt: #f4ede1;
+            --text: #2d2116;
+            --muted: #6b5a46;
+            --accent: #b22222;
+            --accent-2: #0f4c81;
+            --border: #e4d8c5;
+            --shadow: 0 10px 30px rgba(45, 33, 22, 0.08);
+            --radius: 22px;
+            --max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+            background: linear-gradient(180deg, #fffaf3 0%, #f8f2e8 100%);
+            color: var(--text);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 2rem));
+            margin: 0 auto;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 250, 243, 0.85);
+            border-bottom: 1px solid rgba(228, 216, 197, 0.85);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 72px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+        }
+
+        .brand-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+            .nav-links a {
+                color: var(--muted);
+                font-weight: 600;
+            }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.95rem 1.2rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #d34141);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border-color: var(--border);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            padding: 5rem 0 3rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 0.5rem 0.85rem;
+            border-radius: 999px;
+            background: #fff;
+            border: 1px solid var(--border);
+            color: var(--accent-2);
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.03;
+            margin: 0 0 1rem;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--muted);
+            max-width: 62ch;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+            margin-top: 1.4rem;
+        }
+
+        .hero-card {
+            background: radial-gradient(circle at top right, rgba(178,34,34,0.12), transparent 40%), white;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 1.3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-photo {
+            min-height: 420px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(178,34,34,0.15), rgba(15,76,129,0.15)), url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-caption {
+            position: absolute;
+            left: 1rem;
+            right: 1rem;
+            bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(228,216,197,0.9);
+            border-radius: 18px;
+            backdrop-filter: blur(8px);
+        }
+
+        section {
+            padding: 2rem 0 4rem;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+            .section-head h2 {
+                font-size: clamp(1.6rem, 3vw, 2.4rem);
+                margin: 0;
+            }
+
+            .section-head p {
+                margin: 0;
+                color: var(--muted);
+                max-width: 60ch;
+                line-height: 1.7;
+            }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+
+            .stat strong {
+                display: block;
+                font-size: 1.7rem;
+                margin-bottom: 0.3rem;
+            }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .news-tag, .event-tag {
+            display: inline-flex;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent-2);
+            background: #edf4fb;
+            padding: 0.4rem 0.65rem;
+            border-radius: 999px;
+            margin-bottom: 0.85rem;
+        }
+
+        .card h3 {
+            margin: 0 0 0.65rem;
+            font-size: 1.15rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .meta {
+            margin-top: 1rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .calendar-layout {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .calendar-shell {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .calendar-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .calendar-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .calendar-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+            .calendar-controls button {
+                border: 1px solid var(--border);
+                background: white;
+                border-radius: 12px;
+                min-width: 42px;
+                min-height: 42px;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+
+        .weekdays, .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+            .weekdays div {
+                padding: 0.85rem;
+                text-align: center;
+                font-weight: 800;
+                color: var(--muted);
+                font-size: 0.85rem;
+            }
+
+        .day {
+            min-height: 104px;
+            padding: 0.7rem;
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            position: relative;
+            background: #fff;
+            cursor: pointer;
+            transition: 0.15s ease;
+        }
+
+            .day:nth-child(7n) {
+                border-right: none;
+            }
+
+            .day:hover {
+                background: #fff8ef;
+            }
+
+            .day.muted {
+                background: #fcf8f1;
+                color: #baa892;
+            }
+
+            .day.today {
+                outline: 2px solid rgba(178,34,34,0.22);
+                outline-offset: -2px;
+            }
+
+            .day.has-event .day-number {
+                background: linear-gradient(135deg, var(--accent), #d34141);
+                color: white;
+            }
+
+            .day.selected {
+                background: #fff3f0;
+                box-shadow: inset 0 0 0 2px rgba(178,34,34,0.3);
+            }
+
+        .day-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            margin-bottom: 0.45rem;
+        }
+
+        .event-dot {
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-2);
+            margin-bottom: 0.35rem;
+        }
+
+        .event-mini {
+            font-size: 0.75rem;
+            line-height: 1.3;
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .sidebar-stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .event-list {
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .event-item {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 0.95rem;
+            background: var(--surface-alt);
+        }
+
+            .event-item strong {
+                display: block;
+                margin-bottom: 0.35rem;
+            }
+
+        .empty-state {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0 3rem;
+            color: var(--muted);
+        }
+
+        .footer-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid,
+            .calendar-layout,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                padding: 0.8rem 0;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                gap: 0.75rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .day {
+                min-height: 86px;
+                padding: 0.45rem;
+            }
+
+            .event-mini {
+                font-size: 0.68rem;
+            }
+
+            .hero {
+                padding-top: 3rem;
+            }
+
+            .hero-photo {
+                min-height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <a class="brand" href="#inicio">
+                <span class="brand-badge">AP</span>
+                <span>Alma Peñaflorina</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#nosotros">Nosotros</a>
+                <a href="#noticias">Noticias</a>
+                <a href="#eventos">Eventos</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">Cueca · Cultura · Comunidad</span>
+                    <h1>Tradición que se baila con el corazón.</h1>
+                    <p>
+                        Alma Peñaflorina es una agrupación cuequera dedicada a mantener viva la identidad chilena,
+                        compartir nuestras raíces y llevar la cueca a escenarios, encuentros y actividades comunitarias.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#eventos">Ver próximos eventos</a>
+                        <a class="btn btn-secondary" href="#noticias">Últimas noticias</a>
+                    </div>
+
+                    <div class="stats">
+                        <article class="stat">
+                            <strong>+10</strong>
+                            <span>Años promoviendo la cueca</span>
+                        </article>
+                        <article class="stat">
+                            <strong>12</strong>
+                            <span>Eventos y presentaciones al año</span>
+                        </article>
+                        <article class="stat">
+                            <strong>100%</strong>
+                            <span>Pasión por nuestras tradiciones</span>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="hero-photo">
+                        <div class="hero-caption">
+                            <strong>Alma Peñaflorina</strong>
+                            <div>Presentaciones, talleres, encuentros y amor por la cueca chilena.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Nuestra agrupación</h2>
+                        <p>
+                            Nacimos con la idea de representar a Peñaflor con orgullo, fortalecer la participación cultural
+                            y crear espacios donde la cueca se viva con identidad, respeto y alegría.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="noticias">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Noticias</h2>
+                        <p>Espacio para comunicar actividades, ensayos, presentaciones y novedades de la agrupación.</p>
+                    </div>
+                </div>
+
+                <div class="news-grid">
+                    <article class="card">
+                        <span class="news-tag">Ensayo general</span>
+                        <h3>Preparación para la temporada de otoño</h3>
+                        <p>Comenzamos una nueva etapa de ensayos enfocada en repertorio, coordinación escénica y próximas presentaciones locales.</p>
+                        <div class="meta">Publicado el 18 de marzo de 2026</div>
+                    </article>
+
+                    <article class="card">
+                        <span class="news-tag">Comunidad</span>
+                        <h3>Nueva jornada abierta para integrantes y familias</h3>
+                        <p>Invitamos a la comunidad a conocer nuestro trabajo, compartir una jornada cultural y acercarse al mundo de la cueca.</p>
+                        <div class="meta">Publicado el 12 de marzo de 2026</div>
+                    </article>
+
+                    <article class="card">
+                        <span class="news-tag">Presentación</span>
+                        <h3>Confirmamos participación en actividad comunal</h3>
+                        <p>La agrupación será parte de una próxima jornada artística, reforzando el vínculo con la identidad local y las tradiciones chilenas.</p>
+                        <div class="meta">Publicado el 4 de marzo de 2026</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="eventos">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Calendario de eventos</h2>
+                        <p>Revisa los próximos encuentros y selecciona un día para ver el detalle. Puedes cambiar de mes y explorar la agenda de la agrupación.</p>
+                    </div>
+                </div>
+
+                <div class="calendar-layout">
+                    <div class="calendar-shell">
+                        <div class="calendar-top">
+                            <div class="calendar-title" id="calendarTitle">Calendario</div>
+                            <div class="calendar-controls">
+                                <button id="prevMonth" aria-label="Mes anterior">←</button>
+                                <button id="nextMonth" aria-label="Mes siguiente">→</button>
+                            </div>
+                        </div>
+
+                        <div class="weekdays">
+                            <div>Lun</div>
+                            <div>Mar</div>
+                            <div>Mié</div>
+                            <div>Jue</div>
+                            <div>Vie</div>
+                            <div>Sáb</div>
+                            <div>Dom</div>
+                        </div>
+
+                        <div class="days" id="calendarDays"></div>
+                    </div>
+
+                    <div class="sidebar-stack">
+                        <aside class="card">
+                            <span class="event-tag">Próximos eventos</span>
+                            <div id="upcomingEvents" class="event-list"></div>
+                        </aside>
+
+                        <aside class="card">
+                            <span class="event-tag">Detalle del día seleccionado</span>
+                            <div id="selectedDateLabel" class="meta" style="margin-top:0; margin-bottom: 0.8rem;">Selecciona una fecha</div>
+                            <div id="selectedEvents" class="event-list">
+                                <p class="empty-state">Aquí aparecerán los eventos del día que selecciones en el calendario.</p>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Contacto</h2>
+                        <p>¿Quieres invitarnos a un evento, colaborar o sumarte a la agrupación? Conversemos.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <p><strong>Email:</strong> contacto@almapenaflorina.cl</p>
+                    <p><strong>Instagram:</strong> @almapenaflorina</p>
+                    <p><strong>Ubicación:</strong> Peñaflor, Región Metropolitana, Chile</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div>© 2026 Alma Peñaflorina. Todos los derechos reservados.</div>
+            <div>Hecho con orgullo cuequero y corazón chileno.</div>
+        </div>
+    </footer>
+
+    <script>
+    const events = [
+      {
+        date: '2026-04-11',
+        title: 'Completada solidaria',
+        time: '17:00 hrs',
+        location: 'Peñaflor',
+        description: 'Actividad de encuentro comunitario y apoyo a las actividades de la agrupación.'
+      },
+      {
+        date: '2026-04-18',
+        title: 'Ensayo abierto',
+        time: '16:00 hrs',
+        location: 'Sede comunitaria',
+        description: 'Jornada abierta para compartir repertorio, coordinación y práctica con nuevos asistentes.'
+      },
+      {
+        date: '2026-04-26',
+        title: 'Presentación cultural',
+        time: '19:30 hrs',
+        location: 'Plaza de Peñaflor',
+        description: 'Presentación artística de la agrupación en actividad comunal.'
+      },
+      {
+        date: '2026-05-03',
+        title: 'Taller de cueca',
+        time: '11:30 hrs',
+        location: 'Centro cultural',
+        description: 'Espacio formativo para niñas, niños, jóvenes y adultos interesados en aprender cueca.'
+      },
+      {
+        date: '2026-05-15',
+        title: 'Encuentro folclórico',
+        time: '18:00 hrs',
+        location: 'Talagante',
+        description: 'Participación en jornada folclórica junto a agrupaciones invitadas.'
+      }
+    ];
+
+    const monthNames = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+
+    const calendarTitle = document.getElementById('calendarTitle');
+    const calendarDays = document.getElementById('calendarDays');
+    const selectedEvents = document.getElementById('selectedEvents');
+    const selectedDateLabel = document.getElementById('selectedDateLabel');
+    const upcomingEvents = document.getElementById('upcomingEvents');
+    const prevMonth = document.getElementById('prevMonth');
+    const nextMonth = document.getElementById('nextMonth');
+
+    const today = new Date();
+    let currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    let selectedDate = null;
+
+    function formatDate(dateString) {
+      const date = new Date(dateString + 'T00:00:00');
+      return date.toLocaleDateString('es-CL', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+
+    function getEventsForDate(dateString) {
+      return events.filter(event => event.date === dateString);
+    }
+
+    function renderUpcomingEvents() {
+      const upcoming = [...events]
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(0, 4);
+
+      upcomingEvents.innerHTML = upcoming.map(event => `
+        <div class="event-item">
+          <strong>${event.title}</strong>
+          <div>${formatDate(event.date)}</div>
+          <div>${event.time} · ${event.location}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderSelectedEvents() {
+      if (!selectedDate) {
+        selectedDateLabel.textContent = 'Selecciona una fecha';
+        selectedEvents.innerHTML = '<p class="empty-state">Aquí aparecerán los eventos del día que selecciones en el calendario.</p>';
+        return;
+      }
+
+      const items = getEventsForDate(selectedDate);
+      selectedDateLabel.textContent = formatDate(selectedDate);
+
+      if (!items.length) {
+        selectedEvents.innerHTML = '<p class="empty-state">No hay eventos programados para este día.</p>';
+        return;
+      }
+
+      selectedEvents.innerHTML = items.map(event => `
+        <div class="event-item">
+          <strong>${event.title}</strong>
+          <div>${event.time} · ${event.location}</div>
+          <div style="margin-top:0.4rem; color: var(--muted); line-height:1.6;">${event.description}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      calendarTitle.textContent = `${monthNames[month]} ${year}`;
+
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const prevLastDay = new Date(year, month, 0);
+
+      const firstWeekday = (firstDay.getDay() + 6) % 7; // lunes = 0
+      const totalDays = lastDay.getDate();
+      const prevMonthDays = prevLastDay.getDate();
+      const cells = [];
+
+      for (let i = firstWeekday - 1; i >= 0; i--) {
+        const dayNum = prevMonthDays - i;
+        const prevMonthDate = new Date(year, month - 1, dayNum);
+        const dateStr = prevMonthDate.toISOString().split('T')[0];
+        cells.push(createDayCell(dayNum, dateStr, true));
+      }
+
+      for (let day = 1; day <= totalDays; day++) {
+        const dateObj = new Date(year, month, day);
+        const dateStr = dateObj.toISOString().split('T')[0];
+        cells.push(createDayCell(day, dateStr, false));
+      }
+
+      while (cells.length % 7 !== 0) {
+        const nextDay = cells.length - (firstWeekday + totalDays) + 1;
+        const nextMonthDate = new Date(year, month + 1, nextDay);
+        const dateStr = nextMonthDate.toISOString().split('T')[0];
+        cells.push(createDayCell(nextDay, dateStr, true));
+      }
+
+      calendarDays.innerHTML = cells.join('');
+
+      document.querySelectorAll('.day').forEach(el => {
+        el.addEventListener('click', () => {
+          selectedDate = el.dataset.date;
+          renderCalendar();
+          renderSelectedEvents();
+        });
+      });
+    }
+
+    function createDayCell(dayNumber, dateStr, muted) {
+      const dayEvents = getEventsForDate(dateStr);
+      const dateObj = new Date(dateStr + 'T00:00:00');
+      const isToday = today.toDateString() === dateObj.toDateString();
+      const isSelected = selectedDate === dateStr;
+      const preview = dayEvents.slice(0, 2).map(event => `
+        <span class="event-dot"></span>
+        <div class="event-mini">${event.title}</div>
+      `).join('');
+
+      return `
+        <div class="day ${muted ? 'muted' : ''} ${dayEvents.length ? 'has-event' : ''} ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}" data-date="${dateStr}">
+          <div class="day-number">${dayNumber}</div>
+          ${preview}
+        </div>
+      `;
+    }
+
+    prevMonth.addEventListener('click', () => {
+      currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+      renderCalendar();
+    });
+
+    nextMonth.addEventListener('click', () => {
+      currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+      renderCalendar();
+    });
+
+    renderUpcomingEvents();
+    renderSelectedEvents();
+    renderCalendar();
+    </script>
+</body>
+</html>
