@@ -1,0 +1,10 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Alma-Penaflorina.slnx/FileContentIndex
+/.vs/Alma-Penaflorina.slnx/config
+/.vs/Alma-Penaflorina.slnx/v18
+*.sqlite-journal
+/.vs/slnx.sqlite
+.vs
