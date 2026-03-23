@@ -1,3 +1,5 @@
+import { escapeText } from '../content/markdown.js';
+
 const monthNames = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -38,13 +40,21 @@ export function createCalendar({ events, elements }) {
     }
 
     function renderUpcomingEvents() {
-        const upcoming = sortEventsByDate(events).slice(0, 4);
+        const todayStr = today.toISOString().split('T')[0];
+        const upcoming = sortEventsByDate(events)
+            .filter((event) => event.date >= todayStr)
+            .slice(0, 4);
+
+        if (!upcoming.length) {
+            upcomingEvents.innerHTML = '<p class="empty-state">No hay próximos eventos publicados por ahora.</p>';
+            return;
+        }
 
         upcomingEvents.innerHTML = upcoming.map((event) => `
             <div class="event-item">
-                <strong>${event.title}</strong>
+                <strong>${escapeText(event.title)}</strong>
                 <div>${formatDate(event.date)}</div>
-                <div>${event.time} · ${event.location}</div>
+                <div>${escapeText(event.time)} · ${escapeText(event.location)}</div>
             </div>
         `).join('');
     }
@@ -66,9 +76,9 @@ export function createCalendar({ events, elements }) {
 
         selectedEvents.innerHTML = items.map((event) => `
             <div class="event-item">
-                <strong>${event.title}</strong>
-                <div>${event.time} · ${event.location}</div>
-                <div class="event-description">${event.description}</div>
+                <strong>${escapeText(event.title)}</strong>
+                <div>${escapeText(event.time)} · ${escapeText(event.location)}</div>
+                <div class="event-description rich-text">${event.descriptionHtml || ''}</div>
             </div>
         `).join('');
     }
@@ -80,7 +90,7 @@ export function createCalendar({ events, elements }) {
         const isSelected = selectedDate === dateStr;
         const preview = dayEvents.slice(0, 2).map((event) => `
             <span class="event-dot"></span>
-            <div class="event-mini">${event.title}</div>
+            <div class="event-mini">${escapeText(event.title)}</div>
         `).join('');
 
         return `
