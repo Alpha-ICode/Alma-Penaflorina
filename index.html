@@ -15,7 +15,20 @@
                 <span>Alma Peñaflorina</span>
             </a>
 
-            <nav class="nav-links">
+            <button
+                class="nav-toggle"
+                id="navToggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="siteNav"
+                aria-label="Abrir menú de navegación"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-links" id="siteNav">
                 <a href="#nosotros">Nosotros</a>
                 <a href="#noticias">Noticias</a>
                 <a href="#eventos">Eventos</a>
@@ -105,7 +118,7 @@
                 <div class="section-head">
                     <div>
                         <h2>Calendario de eventos</h2>
-                        <p>Revisa los próximos encuentros y selecciona un día para ver el detalle. Puedes cambiar de mes y explorar la agenda de la agrupación.</p>
+                        <p>Revisa los próximos encuentros y selecciona un día para ver los detalles en una ventana emergente. Puedes cambiar de mes y explorar la agenda de la agrupación.</p>
                     </div>
                 </div>
 
@@ -136,14 +149,6 @@
                         <aside class="card">
                             <span class="event-tag">Próximos eventos</span>
                             <div id="upcomingEvents" class="event-list"></div>
-                        </aside>
-
-                        <aside class="card">
-                            <span class="event-tag">Detalle del día seleccionado</span>
-                            <div id="selectedDateLabel" class="meta selected-date-label">Selecciona una fecha</div>
-                            <div id="selectedEvents" class="event-list">
-                                <p class="empty-state">Aquí aparecerán los eventos del día que selecciones en el calendario.</p>
-                            </div>
                         </aside>
                     </div>
                 </div>
@@ -187,6 +192,21 @@
             </div>
         </section>
     </main>
+
+    <div class="modal-backdrop" id="eventModal" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+            <div class="modal-header">
+                <div>
+                    <span class="event-tag">Eventos del día</span>
+                    <h3 id="eventModalTitle">Selecciona una fecha</h3>
+                </div>
+                <button class="modal-close" id="eventModalClose" type="button" aria-label="Cerrar detalle del día">×</button>
+            </div>
+            <div id="eventModalBody" class="event-list">
+                <p class="empty-state">Selecciona un día del calendario para ver sus actividades.</p>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="container footer-grid">
