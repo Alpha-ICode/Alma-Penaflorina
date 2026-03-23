@@ -87,10 +87,14 @@ export function createCalendar({ events, elements }) {
         }
 
         eventModalBody.innerHTML = items.map((event) => `
-            <div class="day-event-preview">
-                <span class="event-dot"></span>
-                <div class="event-mini">${escapeText(event.title)}</div>
-            </div>
+            <article class="modal-event-item">
+                <div class="modal-event-title">
+                    <span class="event-dot"></span>
+                    <strong>${escapeText(event.title)}</strong>
+                </div>
+                <div class="modal-event-meta">${escapeText(event.time)} · ${escapeText(event.location)}</div>
+                <p class="modal-event-summary">${escapeText(event.summary)}</p>
+            </article>
         `).join('');
     }
 
