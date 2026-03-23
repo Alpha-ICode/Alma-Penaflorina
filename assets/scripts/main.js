@@ -82,7 +82,7 @@ async function init() {
         calendar.init();
     } catch (error) {
         console.error(error);
-        renderLoadError('Revisa que el sitio se esté sirviendo desde un hosting o servidor local y que los archivos Markdown existan.');
+        renderLoadError(`Revisa que el sitio se esté sirviendo desde un hosting o servidor local y que los archivos Markdown existan. ${error.message}`);
     }
 }
 
