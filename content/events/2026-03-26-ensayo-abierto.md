@@ -1,7 +1,7 @@
 ---
 title: Ensayo abierto
-date: 2026-03-24
-time: 16:00 hrs
+date: 2026-03-26
+time: 19:00 hrs
 location: Sede comunitaria
 summary: Jornada abierta para compartir repertorio, coordinación y práctica.
 ---
