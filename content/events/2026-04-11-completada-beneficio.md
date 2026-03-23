@@ -1,5 +1,5 @@
 ---
-title: Completada solidaria
+title: Completada a beneficio
 date: 2026-04-11
 time: 17:00 hrs
 location: Peñaflor
