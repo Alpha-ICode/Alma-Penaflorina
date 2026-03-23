@@ -1,9 +1,9 @@
 ---
-title: Confirmamos participación en actividad comunal
-date: 2026-03-04
-tag: Presentación
-summary: La agrupación será parte de una próxima jornada artística, reforzando el vínculo con la identidad local y las tradiciones chilenas.
+title: Completada a beneficio
+date: 2026-04-11
+tag: Comunidad
+summary: La agrupación realizará una completada a beneficio para costear sus trajes de cueca.
 ---
-La agrupación será parte de una próxima jornada artística, reforzando el vínculo con la identidad local y las tradiciones chilenas.
+El 4 de abril Alma Peñaflorina realizará una gran completada a beneficio, con el fin de recaudar fondos para comprar los trajes de cueca para nuestros integrantes.
 
-Pronto compartiremos más detalles sobre horarios, ubicación y actividades asociadas.
+Pronto compartiremos más detalles sobre horarios, ubicación y precios.
