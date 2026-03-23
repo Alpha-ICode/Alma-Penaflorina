@@ -24,11 +24,13 @@ export function createCalendar({ events, elements }) {
     const {
         calendarTitle,
         calendarDays,
-        selectedEvents,
-        selectedDateLabel,
         upcomingEvents,
         prevMonth,
-        nextMonth
+        nextMonth,
+        eventModal,
+        eventModalTitle,
+        eventModalBody,
+        eventModalClose
     } = elements;
 
     const today = new Date();
@@ -59,26 +61,35 @@ export function createCalendar({ events, elements }) {
         `).join('');
     }
 
-    function renderSelectedEvents() {
+    function openModal() {
+        eventModal.hidden = false;
+        document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+        eventModal.hidden = true;
+        document.body.classList.remove('modal-open');
+    }
+    
+    function renderModalContent() {
         if (!selectedDate) {
-            selectedDateLabel.textContent = 'Selecciona una fecha';
-            selectedEvents.innerHTML = '<p class="empty-state">Aquí aparecerán los eventos del día que selecciones en el calendario.</p>';
+            eventModalTitle.textContent = 'Selecciona una fecha';
+            eventModalBody.innerHTML = '<p class="empty-state">Selecciona un día del calendario para ver sus actividades.</p>';
             return;
         }
 
         const items = getEventsForDate(selectedDate);
-        selectedDateLabel.textContent = formatDate(selectedDate);
+        eventModalTitle.textContent = formatDate(selectedDate);
 
         if (!items.length) {
-            selectedEvents.innerHTML = '<p class="empty-state">No hay eventos programados para este día.</p>';
+            eventModalBody.innerHTML = '<p class="empty-state">No hay eventos programados para este día.</p>';
             return;
         }
 
-        selectedEvents.innerHTML = items.map((event) => `
-            <div class="event-item">
-                <strong>${escapeText(event.title)}</strong>
-                <div>${escapeText(event.time)} · ${escapeText(event.location)}</div>
-                <div class="event-description rich-text">${event.descriptionHtml || ''}</div>
+        eventModalBody.innerHTML = items.map((event) => `
+            <div class="day-event-preview">
+                <span class="event-dot"></span>
+                <div class="event-mini">${escapeText(event.title)}</div>
             </div>
         `).join('');
     }
@@ -94,22 +105,25 @@ export function createCalendar({ events, elements }) {
         `).join('');
 
         return `
-            <div
+            <button
                 class="day ${muted ? 'muted' : ''} ${dayEvents.length ? 'has-event' : ''} ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}"
                 data-date="${dateStr}"
+                type="button"
+                aria-label="${dayEvents.length ? `${formatDate(dateStr)} con ${dayEvents.length} evento${dayEvents.length > 1 ? 's' : ''}` : formatDate(dateStr)}"
             >
                 <div class="day-number">${dayNumber}</div>
-                ${preview}
-            </div>
+                <div class="day-events">${preview}</div>
+            </button>
         `;
     }
 
     function bindDaySelection() {
-        document.querySelectorAll('.day').forEach((element) => {
+        calendarDays.querySelectorAll('.day').forEach((element) => {
             element.addEventListener('click', () => {
                 selectedDate = element.dataset.date;
                 renderCalendar();
-                renderSelectedEvents();
+                renderModalContent();
+                openModal();
             });
         });
     }
@@ -159,11 +173,22 @@ export function createCalendar({ events, elements }) {
 
     prevMonth.addEventListener('click', () => changeMonth(-1));
     nextMonth.addEventListener('click', () => changeMonth(1));
+    eventModalClose.addEventListener('click', closeModal);
+    eventModal.addEventListener('click', (event) => {
+        if (event.target === eventModal) {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !eventModal.hidden) {
+            closeModal();
+        }
+    });
 
     return {
         init() {
             renderUpcomingEvents();
-            renderSelectedEvents();
+            renderModalContent();
             renderCalendar();
         }
     };
