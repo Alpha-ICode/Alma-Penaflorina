@@ -1,7 +1,7 @@
 ---
 title: Preparación para el taller de cueca
 date: 2026-03-27
-tag: Ensayo general
+tag: Comunidad
 summary: Comenzamos una nueva implementando un nuevo taller de cueca en Alma Peñaflorina
 ---
 Comenzamos una nueva implementando un nuevo taller de cueca en Alma Peñaflorina. Pronto informaremos más detalles
